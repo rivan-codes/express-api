@@ -3,6 +3,20 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+ 
+var knex = require('knex')({
+  client: 'pg',
+  version: '12.3',
+  connection: {
+    host : '127.0.0.1',
+    user : 'postgres',
+    password : '12345',
+    database : 'learn_express_js'
+  } 
+});
+
+knex.on('error', (error) => console.log(error));
+knex.once('open', () => console.log('Database connected'));
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');

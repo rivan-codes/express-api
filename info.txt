@@ -1,0 +1,18 @@
+/********** Useful Link **********/
+
+- Node JS alternative from laravel/symfony
+https://gist.github.com/misenhower/572f2121056edc380fe3b4ba047d0614
+
+
+/********** TODO **********/
+
+- DB connection
+- DB migrations
+- ORM + DB transaction
+- Validation request
+- CRUD
+- Files structure managements
+- Response handler (exeption)
+- Jobs Async
+- Jobs Queue
+- Jobs Cron
