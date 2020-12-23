@@ -3,24 +3,16 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
- 
-var knex = require('knex')({
-  client: 'pg',
-  version: '12.3',
-  connection: {
-    host : '127.0.0.1',
-    user : 'postgres',
-    password : '12345',
-    database : 'learn_express_js'
-  } 
-});
+var connection = require('./db');
 
-knex.on('error', (error) => console.log(error));
-knex.once('open', () => console.log('Database connected'));
+var { Model } = require('objection');
+Model.knex(connection);
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var pegawaiRouter = require('./routes/pegawai');
+connection.on('error', (error) => console.log(error));
+connection.once('open', () => console.log('Database connected'));
+
+var indexRouter = require('./routes/indexRoute');
+var usersRouter = require('./routes/usersRoute');
 
 var app = express();
 
@@ -36,7 +28,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/pegawai', pegawaiRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
